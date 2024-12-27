@@ -24,18 +24,18 @@ class ActivityListCreateView(ListCreateAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
+        # Ensure only the authenticated user's activities are returned
         return Activity.objects.filter(user=self.request.user)
-    
 
     def perform_create(self, serializer):
+        # Automatically set the authenticated user as the owner of the activity
         serializer.save(user=self.request.user)
-
 
 class ActivityDetailView(RetrieveUpdateDestroyAPIView):
     serializer_class = ActivitySerializer
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
+        # Ensure only the authenticated user's activities are accessible
         return Activity.objects.filter(user=self.request.user)
-
 
