@@ -9,6 +9,11 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'fallback-secret-key-for-local')
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 ALLOWED_HOSTS = ['fitness-tracker-api-rdfe.onrender.com', 'localhost', '127.0.0.1']
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://fitness-tracker-api-rdfe.onrender.com',
+]
+
+
 
 # Application definition
 INSTALLED_APPS = [
@@ -97,7 +102,13 @@ USE_I18N = True
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
-STATIC_URL = 'static/'
+
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
