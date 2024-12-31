@@ -1,6 +1,6 @@
 from decouple import config
 from pathlib import Path
-
+from datetime import timedelta
 # Paths
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -100,6 +100,14 @@ REST_FRAMEWORK = {
     ),
 }
 
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
+    'ROTATE_REFRESH_TOKEN': True,
+}
+
+
+
 # Security settings for production
 if not DEBUG:
     SECURE_HSTS_SECONDS = 31536000
@@ -108,3 +116,5 @@ if not DEBUG:
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
+
+
